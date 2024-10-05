@@ -13,6 +13,7 @@
     --accent-color: #9e2d2d;
     --accent-hover: #c73636;
     --input-bg: #1a1a1a;
+    --badge-bg: #4a90e2;
   }
   body, html {
     height: 100%;
@@ -88,6 +89,16 @@
     color: var(--text-secondary);
     margin-right: 8px;
   }
+  .badge {
+    display: inline-block;
+    background-color: var(--badge-bg);
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+    cursor: help;
+  }
   h2 {
     color: var(--text-secondary);
     font-size: 24px;
@@ -109,6 +120,19 @@
   .hidden {
     display: none;
   }
+  #settingsButton {
+    margin-top: auto;
+    margin-bottom: 10px;
+  }
+  #sourceCodeLink {
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  #sourceCodeLink:hover {
+    text-decoration: underline;
+  }
 </style>
 </head>
 <body>
@@ -119,7 +143,8 @@
     <div id="userInfo">
       <p>Current Username: <span id="currentUsername"></span></p>
     </div>
-    <div id="settingsMenu">
+    <button id="settingsButton" onclick="toggleSettings()">Settings</button>
+    <div id="settingsMenu" class="hidden">
       <h3>Settings</h3>
       <label for="usernameInput">Change Username:</label>
       <input type="text" id="usernameInput" placeholder="Enter new username">
@@ -131,6 +156,7 @@
         <option value="midnightRed">Midnight Red</option>
         <option value="darkGray">Dark Gray</option>
       </select>
+      <a id="sourceCodeLink" href="https://github.com/SDHL-Scyda/Ricknick" target="_blank">Source Code</a>
     </div>
   </div>
   <div class="main">
@@ -160,7 +186,8 @@
       '--text-secondary': '#e24a4a',
       '--accent-color': '#9e2d2d',
       '--accent-hover': '#c73636',
-      '--input-bg': '#2a2a2a'
+      '--input-bg': '#2a2a2a',
+      '--badge-bg': '#4a90e2'
     },
     pitchBlack: {
       '--bg-primary': '#000000',
@@ -170,7 +197,8 @@
       '--text-secondary': '#e24a4a',
       '--accent-color': '#9e2d2d',
       '--accent-hover': '#c73636',
-      '--input-bg': '#1a1a1a'
+      '--input-bg': '#1a1a1a',
+      '--badge-bg': '#4a90e2'
     },
     midnightRed: {
       '--bg-primary': '#1a0a0a',
@@ -180,7 +208,8 @@
       '--text-secondary': '#e24a4a',
       '--accent-color': '#9e2d2d',
       '--accent-hover': '#c73636',
-      '--input-bg': '#3a2a2a'
+      '--input-bg': '#3a2a2a',
+      '--badge-bg': '#4a90e2'
     },
     darkGray: {
       '--bg-primary': '#1a1a1a',
@@ -190,7 +219,8 @@
       '--text-secondary': '#e24a4a',
       '--accent-color': '#9e2d2d',
       '--accent-hover': '#c73636',
-      '--input-bg': '#3a3a3a'
+      '--input-bg': '#3a3a3a',
+      '--badge-bg': '#4a90e2'
     }
   };
 
@@ -225,11 +255,20 @@
     }
   }
 
+  function toggleSettings() {
+    const settingsMenu = document.getElementById('settingsMenu');
+    settingsMenu.classList.toggle('hidden');
+  }
+
   function displayMessage(message) {
     const chatDiv = document.getElementById('chat');
     const messageElement = document.createElement('div');
     messageElement.classList.add('message');
-    messageElement.innerHTML = `<span class="username">${message.username}:</span> ${message.text}`;
+    let badgeHTML = '';
+    if (message.username === 'Human') {
+      badgeHTML = '<span class="badge" title="Founder">F</span>';
+    }
+    messageElement.innerHTML = `<span class="username">${message.username}${badgeHTML}:</span> ${message.text}`;
     chatDiv.appendChild(messageElement);
     chatDiv.scrollTop = chatDiv.scrollHeight;
   }
