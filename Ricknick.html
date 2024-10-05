@@ -5,14 +5,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
 <style id="themeStyle">
   :root {
-    --bg-primary: #000000;
-    --bg-secondary: #080808;
-    --bg-tertiary: #101010;
-    --text-primary: #ffffff;
-    --text-secondary: #e24a4a;
-    --accent-color: #9e2d2d;
-    --accent-hover: #c73636;
-    --input-bg: #1a1a1a;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f0f0f0;
+    --bg-tertiary: #e0e0e0;
+    --text-primary: #0000ff;
+    --text-secondary: #0000ff;
+    --accent-color: #0000ff;
+    --accent-hover: #0000cc;
+    --input-bg: #ffffff;
     --badge-bg: #4a90e2;
   }
   body, html {
@@ -31,7 +31,7 @@
     background-color: var(--bg-secondary);
     padding: 20px;
     box-sizing: border-box;
-    border-right: 1px solid #333;
+    border-right: 1px solid #d0d0d0;
     display: flex;
     flex-direction: column;
   }
@@ -49,7 +49,7 @@
     background-color: var(--bg-tertiary);
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   #messageForm {
     display: flex;
@@ -57,7 +57,7 @@
   #messageInput {
     flex-grow: 1;
     padding: 12px;
-    border: none;
+    border: 1px solid var(--accent-color);
     border-radius: 20px;
     background-color: var(--input-bg);
     color: var(--text-primary);
@@ -108,7 +108,7 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: none;
+    border: 1px solid var(--accent-color);
     border-radius: 4px;
     background-color: var(--input-bg);
     color: var(--text-primary);
@@ -139,7 +139,7 @@
 <div class="container">
   <div class="sidebar">
     <h2>Ricknick</h2>
-    <p>1. Server, 1. Username</p>
+    <p>1 Server, 1 Username</p>
     <div id="userInfo">
       <p>Current Username: <span id="currentUsername"></span></p>
     </div>
@@ -151,10 +151,10 @@
       <button onclick="changeUsername()">Update Username</button>
       <label for="themeSelect">Select Theme:</label>
       <select id="themeSelect" onchange="changeTheme()">
-        <option value="darkMode">Dark Mode</option>
-        <option value="pitchBlack">Pitch Black</option>
-        <option value="midnightRed">Midnight Red</option>
-        <option value="darkGray">Dark Gray</option>
+        <option value="lightMode">Light Mode</option>
+        <option value="pureWhite">Pure White</option>
+        <option value="skyBlue">Sky Blue</option>
+        <option value="softGray">Soft Gray</option>
       </select>
       <a id="sourceCodeLink" href="https://github.com/SDHL-Scyda/Ricknick" target="_blank">Source Code</a>
     </div>
@@ -175,51 +175,51 @@
   const chat = gun.get('ricknick-chat-customizable');
 
   let currentUsername = localStorage.getItem('username') || '';
-  let currentTheme = localStorage.getItem('theme') || 'pitchBlack';
+  let currentTheme = localStorage.getItem('theme') || 'pureWhite';
 
   const themes = {
-    darkMode: {
-      '--bg-primary': '#0a0a0a',
-      '--bg-secondary': '#121212',
-      '--bg-tertiary': '#1e1e1e',
-      '--text-primary': '#e0e0e0',
-      '--text-secondary': '#e24a4a',
-      '--accent-color': '#9e2d2d',
-      '--accent-hover': '#c73636',
-      '--input-bg': '#2a2a2a',
+    lightMode: {
+      '--bg-primary': '#ffffff',
+      '--bg-secondary': '#f0f0f0',
+      '--bg-tertiary': '#e0e0e0',
+      '--text-primary': '#0000ff',
+      '--text-secondary': '#0000ff',
+      '--accent-color': '#0000ff',
+      '--accent-hover': '#0000cc',
+      '--input-bg': '#ffffff',
       '--badge-bg': '#4a90e2'
     },
-    pitchBlack: {
-      '--bg-primary': '#000000',
-      '--bg-secondary': '#080808',
-      '--bg-tertiary': '#101010',
-      '--text-primary': '#ffffff',
-      '--text-secondary': '#e24a4a',
-      '--accent-color': '#9e2d2d',
-      '--accent-hover': '#c73636',
-      '--input-bg': '#1a1a1a',
+    pureWhite: {
+      '--bg-primary': '#ffffff',
+      '--bg-secondary': '#ffffff',
+      '--bg-tertiary': '#f8f8f8',
+      '--text-primary': '#0000ff',
+      '--text-secondary': '#0000ff',
+      '--accent-color': '#0000ff',
+      '--accent-hover': '#0000cc',
+      '--input-bg': '#ffffff',
       '--badge-bg': '#4a90e2'
     },
-    midnightRed: {
-      '--bg-primary': '#1a0a0a',
-      '--bg-secondary': '#1e1212',
-      '--bg-tertiary': '#2a1e1e',
-      '--text-primary': '#e0e0e0',
-      '--text-secondary': '#e24a4a',
-      '--accent-color': '#9e2d2d',
-      '--accent-hover': '#c73636',
-      '--input-bg': '#3a2a2a',
+    skyBlue: {
+      '--bg-primary': '#e6f2ff',
+      '--bg-secondary': '#f0f8ff',
+      '--bg-tertiary': '#ffffff',
+      '--text-primary': '#0000ff',
+      '--text-secondary': '#0000ff',
+      '--accent-color': '#0000ff',
+      '--accent-hover': '#0000cc',
+      '--input-bg': '#ffffff',
       '--badge-bg': '#4a90e2'
     },
-    darkGray: {
-      '--bg-primary': '#1a1a1a',
-      '--bg-secondary': '#222222',
-      '--bg-tertiary': '#2a2a2a',
-      '--text-primary': '#e0e0e0',
-      '--text-secondary': '#e24a4a',
-      '--accent-color': '#9e2d2d',
-      '--accent-hover': '#c73636',
-      '--input-bg': '#3a3a3a',
+    softGray: {
+      '--bg-primary': '#f5f5f5',
+      '--bg-secondary': '#ebebeb',
+      '--bg-tertiary': '#ffffff',
+      '--text-primary': '#0000ff',
+      '--text-secondary': '#0000ff',
+      '--accent-color': '#0000ff',
+      '--accent-hover': '#0000cc',
+      '--input-bg': '#ffffff',
       '--badge-bg': '#4a90e2'
     }
   };
@@ -272,6 +272,13 @@
     chatDiv.appendChild(messageElement);
     chatDiv.scrollTop = chatDiv.scrollHeight;
   }
+
+  // Clear the chat
+  chat.map().once(function(message, id) {
+    if (message) {
+      chat.get(id).put(null);
+    }
+  });
 
   chat.map().on(function(message, id) {
     if (message && message.username && message.text) {
